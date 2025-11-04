@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gobierno de Santa Fe - Réplica</title>
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    
+    <style>
+        /* --- Reset Básico y Fuentes --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- 1. Header Superior --- */
+        .top-bar {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 8px 0;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar-links a {
+            margin-right: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .top-bar-links a i {
+            font-size: 14px;
+        }
+
+        .top-bar-social a {
+            margin-left: 12px;
+            font-size: 18px;
+            color: #555;
+            transition: color 0.2s ease;
+        }
+        
+        .top-bar-social a:hover {
+            color: #e65100; /* Color naranja al hacer hover */
+        }
+
+        /* --- 2. Header Principal (Logo y Navegación) --- */
+        .main-header {
+            background-color: #ffffff;
+            padding: 20px 0;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        .logo .santafe {
+            color: #e65100; /* Naranja */
+        }
+
+        .logo .provincia {
+            color: #6a1b9a; /* Morado */
+        }
+
+        /* --- 3. Barra Lateral (Sidebar) --- */
+        .sidebar-toggle {
+            background-color: transparent;
+            color: #333;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            width: 45px;
+            height: 45px;
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .sidebar-toggle:hover {
+            background-color: #e65100;
+            color: white;
+            border-color: #e65100;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(230, 81, 0, 0.2);
+        }
+        
+        .sidebar-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: #ffffff;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 1003;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+        }
+        
+        .sidebar-menu.active {
+            left: 0;
+        }
+        
+        .sidebar-header {
+            background: linear-gradient(135deg, #e65100, #6a1b9a);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .sidebar-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .sidebar-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s ease;
+        }
+        
+        .sidebar-close:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .sidebar-nav {
+            padding: 20px 0;
+        }
+        
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-menu-item {
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .sidebar-menu-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 20px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+        
+        .sidebar-menu-link:hover {
+            background-color: #fff5f0;
+            color: #e65100;
+        }
+        
+        .sidebar-menu-link i:first-child {
+            font-size: 20px;
+            color: #e65100;
+            width: 24px;
+        }
+        
+        .sidebar-menu-link span {
+            flex: 1;
+        }
+        
+        .sidebar-arrow {
+            font-size: 14px;
+            transition: transform 0.3s ease;
+            color: #999;
+        }
+        
+        .sidebar-menu-item.active .sidebar-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .sidebar-submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: #f8f9fa;
+        }
+        
+        .sidebar-menu-item.active .sidebar-submenu {
+            max-height: 1000px;
+        }
+        
+        .sidebar-submenu li {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .sidebar-submenu li:last-child {
+            border-bottom: none;
+        }
+        
+        .sidebar-submenu a {
+            display: block;
+            padding: 12px 20px 12px 56px;
+            color: #555;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        
+        .sidebar-submenu a:hover {
+            background-color: #e65100;
+            color: white;
+            padding-left: 60px;
+        }
+        
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1002;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* --- 4. Barra de Búsqueda --- */
+        .search-bar {
+            display: flex;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .search-bar input {
+            border: none;
+            padding: 8px 15px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .search-bar button {
+            border: none;
+            background-color: #f0f0f0;
+            padding: 0 15px;
+            cursor: pointer;
+            color: #555;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        
+        .search-bar button:hover {
+            background-color: #e65100;
+            color: #ffffff;
+        }
+        
+        .search-bar button i {
+            font-size: 16px;
+        }
+
+        /* --- 5. Sub-Navegación (Temas) --- */
+        .sub-nav {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px 0;
+        }
+        
+        .sub-nav .container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .sub-nav-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .sub-nav-header i {
+            font-size: 24px;
+            color: #e65100;
+        }
+        
+        .sub-nav-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+        
+        .sub-nav-row {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 8px;
+            width: 100%;
+        }
+        
+        .sub-nav-card {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 6px 8px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            min-height: 50px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .sub-nav-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+            border-color: #e65100;
+            background-color: #fff5f0;
+        }
+        
+        .sub-nav-card i {
+            font-size: 18px;
+            color: #e65100;
+            margin-bottom: 2px;
+        }
+        
+        .sub-nav-card span {
+            font-size: 10px;
+            line-height: 1.2;
+            color: #333;
+        }
+        
+        .sub-nav-card:hover i {
+            color: #6a1b9a;
+        }
+        
+        .sub-nav-card:hover span {
+            color: #e65100;
+        }
+
+        /* --- Sección de Trámites Destacada --- */
+        .tramites-section {
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%);
+            border: 2px solid #e65100;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 4px 16px rgba(230, 81, 0, 0.1);
+        }
+        
+        .tramites-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e65100;
+        }
+        
+        .tramites-header i {
+            font-size: 28px;
+            color: #e65100;
+        }
+        
+        .tramites-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #e65100;
+            margin: 0;
+        }
+        
+        .tramites-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .tramite-card {
+            background-color: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .tramite-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(230, 81, 0, 0.2);
+            border-color: #e65100;
+            background-color: #fff5f0;
+        }
+        
+        .tramite-card i {
+            font-size: 36px;
+            color: #e65100;
+            transition: transform 0.3s ease;
+        }
+        
+        .tramite-card:hover i {
+            transform: scale(1.1);
+            color: #6a1b9a;
+        }
+        
+        .tramite-card span {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+        }
+        
+        .tramite-card:hover span {
+            color: #e65100;
+        }
+
+        /* --- Widget del Clima en la parte superior --- */
+        .weather-section-top {
+            margin: 30px 0;
+        }
+        
+        .weather-widget-top {
+            width: 100%;
+            background-color: #ffffff;
+            border: 2px solid #e65100;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 16px rgba(230, 81, 0, 0.1);
+        }
+        
+        .weather-widget-top .weather-content {
+            flex-direction: row;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .weather-widget-top .weather-main {
+            flex: 0 0 auto;
+            min-width: 200px;
+        }
+        
+        .weather-widget-top .weather-details {
+            flex: 1;
+        }
+        
+        .weather-widget-top .weather-stats {
+            flex-direction: row;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .weather-widget-top h4 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #e65100;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e65100;
+        }
+        
+        .weather-widget-top h4 i {
+            font-size: 28px;
+        }
+
+        /* --- Contenido Principal --- */
+        main {
+            padding: 20px 0;
+        }
+
+        /* --- Sección de Noticias Importantes --- */
+        .important-news-section {
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%);
+            border: 3px solid #e65100;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 24px rgba(230, 81, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .important-news-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, #e65100, #d81b60, #6a1b9a);
+        }
+        
+        .important-news-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e65100;
+        }
+        
+        .important-news-header i {
+            font-size: 32px;
+            color: #e65100;
+        }
+        
+        .important-news-header h2 {
+            font-size: 28px;
+            font-weight: 900;
+            color: #e65100;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .important-news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .important-news-card {
+            background-color: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .important-news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(230, 81, 0, 0.2);
+            border-color: #e65100;
+        }
+        
+        .important-news-badge {
+            position: absolute;
+            top: -12px;
+            right: 15px;
+            background: linear-gradient(135deg, #e65100, #d81b60);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 8px rgba(230, 81, 0, 0.3);
+        }
+        
+        .important-news-content {
+            margin-top: 10px;
+        }
+        
+        .important-news-content h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            line-height: 1.4;
+        }
+        
+        .important-news-content h3 i {
+            color: #e65100;
+            font-size: 20px;
+        }
+        
+        .important-news-content p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .important-news-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #e65100;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .important-news-link:hover {
+            color: #6a1b9a;
+            gap: 10px;
+        }
+        
+        .important-news-link i {
+            font-size: 14px;
+            transition: transform 0.2s ease;
+        }
+        
+        .important-news-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* --- 6. Grilla de Noticias Destacadas --- */
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .card-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        .card-content h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .card-content p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* --- 7. Slogan --- */
+        .slogan {
+            font-size: 48px;
+            font-weight: 900;
+            text-align: center;
+            margin: 40px 0;
+            background: linear-gradient(to right, #e65100, #d81b60, #6a1b9a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* --- 8. Grilla de Banners --- */
+        .banner-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .banner-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+        
+        .banner-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .banner-card span {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+        }
+        
+        .banner-card:hover span {
+            color: #e65100;
+        }
+        
+        .banner-icon-wrapper {
+            width: 100%;
+            height: 120px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .banner-icon-wrapper i {
+            font-size: 48px;
+            color: white;
+        }
+        
+        .banner-card:hover .banner-icon-wrapper {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+        
+        .banner-placeholder {
+            height: 120px;
+            width: 100%;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* --- 9. Imagen Grande (Vacunación) --- */
+        .large-image-section {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .large-image-placeholder {
+            width: 100%;
+            height: 400px;
+            background-color: #b0bec5;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #37474f;
+        }
+        
+        .tag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 6px 12px;
+            background-color: #6a1b9a; /* Morado */
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 5px;
+            z-index: 10;
+        }
+        
+        .tag.salud { background-color: #0277bd; } /* Azul */
+        .tag.social { background-color: #d81b60; } /* Fucsia */
+        .tag.seguridad { background-color: #f9a825; color: #333; } /* Amarillo */
+
+        /* --- 10. Grilla de Contenido + Sidebar --- */
+        .content-sidebar-grid {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .main-content-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .sidebar-widget {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .sidebar-widget h4 {
+            font-size: 18px;
+            border-bottom: 2px solid #e65100;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-widget ul {
+            list-style: none;
+        }
+        
+        .sidebar-widget ul li {
+            margin-bottom: 10px;
+        }
+        
+        .sidebar-widget ul li a {
+            font-size: 15px;
+            color: #0d47a1;
+        }
+        
+        /* --- Widget del Clima --- */
+        .weather-widget {
+            margin-bottom: 20px;
+        }
+        
+        .weather-widget h4 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .weather-widget h4 i {
+            color: #e65100;
+            font-size: 20px;
+        }
+        
+        .weather-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .weather-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%);
+            border-radius: 8px;
+        }
+        
+        .weather-icon {
+            font-size: 48px;
+            color: #f9a825;
+        }
+        
+        .weather-temp {
+            display: flex;
+            align-items: flex-start;
+            gap: 3px;
+        }
+        
+        .temp-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #333;
+            line-height: 1;
+        }
+        
+        .temp-unit {
+            font-size: 18px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .weather-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .weather-location {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+        
+        .weather-location i {
+            color: #e65100;
+        }
+        
+        .weather-description {
+            font-size: 15px;
+            color: #666;
+            margin: 0;
+            font-style: italic;
+        }
+        
+        .weather-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 5px;
+        }
+        
+        .weather-stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .weather-stat i {
+            color: #0277bd;
+            font-size: 16px;
+            width: 20px;
+        }
+
+        /* --- 11. Footer --- */
+        .main-footer {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: #ccc;
+            padding: 50px 0 20px 0;
+            margin-top: 50px;
+            border-top: 4px solid #e65100;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h4 {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e65100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-column h4 i {
+            color: #e65100;
+            font-size: 20px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            font-size: 14px;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #e65100;
+            padding-left: 5px;
+        }
+        
+        .footer-column ul li a i {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .footer-column ul li a:hover i {
+            color: #e65100;
+        }
+        
+        .footer-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            border-top: 1px solid #444;
+            padding-top: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-logo-placeholder {
+            width: 150px;
+            height: 60px;
+            background: linear-gradient(135deg, #e65100, #6a1b9a);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease;
+        }
+        
+        .footer-logo-placeholder:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(230, 81, 0, 0.3);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-bottom span {
+            color: #888;
+        }
+        
+        .footer-bottom a {
+            color: #ccc;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-bottom a:hover {
+            color: #e65100;
+        }
+        
+        /* --- Media Queries (Responsive) --- */
+        @media (max-width: 1024px) {
+            .container {
+                width: 95%;
+            }
+            .search-bar { display: none; } /* Ocultar búsqueda */
+            
+            .featured-grid, .banner-grid, .main-content-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .important-news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .tramites-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .content-sidebar-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .sub-nav-row {
+                grid-template-columns: repeat(6, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .top-bar { display: none; }
+            .sub-nav { display: none; }
+            
+            .sidebar-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+                margin-right: 10px;
+            }
+            
+            .featured-grid, .banner-grid, .main-content-grid, .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .important-news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tramites-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tramites-section {
+                padding: 20px;
+                margin: 20px 0;
+            }
+            
+            .tramites-header h2 {
+                font-size: 20px;
+            }
+            
+            .important-news-section {
+                padding: 20px;
+                margin: 20px 0;
+            }
+            
+            .important-news-header h2 {
+                font-size: 22px;
+            }
+            
+            .important-news-header i {
+                font-size: 24px;
+            }
+            
+            .slogan {
+                font-size: 32px;
+            }
+            
+            .large-image-placeholder {
+                height: 250px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-links">
+                <a href="#"><i class="bi bi-file-text"></i> Trámites</a>
+                <a href="#"><i class="bi bi-building"></i> Organismos</a>
+                <a href="#"><i class="bi bi-envelope"></i> Contacto</a>
+            </div>
+            <div class="top-bar-social">
+                <a href="#" title="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+                <a href="#" title="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" title="YouTube"><i class="bi bi-youtube"></i></a>
+                <a href="#" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra lateral con menús -->
+    <aside class="sidebar-menu" id="sidebarMenu">
+        <div class="sidebar-header">
+            <h2>Menú</h2>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="sidebar-menu-item">
+                    <a href="#" class="sidebar-menu-link">
+                        <i class="bi bi-geo-alt"></i>
+                        <span>Provincia</span>
+                        <i class="bi bi-chevron-down sidebar-arrow"></i>
+                    </a>
+                    <ul class="sidebar-submenu">
+                        <li><a href="#">Información Básica</a></li>
+                        <li><a href="#">Organización del estado</a></li>
+                        <li><a href="#">Turismo</a></li>
+                        <li><a href="#">Estadísticas</a></li>
+                        <li><a href="#">Acueducto Interprovincial</a></li>
+                        <li><a href="#">Constitución de Santa Fe</a></li>
+                    </ul>
+                </li>
+                
+                <li class="sidebar-menu-item">
+                    <a href="#" class="sidebar-menu-link">
+                        <i class="bi bi-building"></i>
+                        <span>Gobierno</span>
+                        <i class="bi bi-chevron-down sidebar-arrow"></i>
+                    </a>
+                    <ul class="sidebar-submenu">
+                        <li><a href="#">Gobierno e Innovación Pública</a></li>
+                        <li><a href="#">Economía</a></li>
+                        <li><a href="#">Desarrollo Productivo</a></li>
+                        <li><a href="#">Justicia y seguridad</a></li>
+                        <li><a href="#">Obras Públicas</a></li>
+                        <li><a href="#">Salud</a></li>
+                        <li><a href="#">Igualdad y desarrollo humano</a></li>
+                        <li><a href="#">Trabajo, Empleo y Seguridad Social</a></li>
+                        <li><a href="#">Cultura</a></li>
+                        <li><a href="#">Ambiente y Cambio Climático</a></li>
+                    </ul>
+                </li>
+                
+                <li class="sidebar-menu-item">
+                    <a href="#" class="sidebar-menu-link">
+                        <i class="bi bi-gear"></i>
+                        <span>Servicios</span>
+                        <i class="bi bi-chevron-down sidebar-arrow"></i>
+                    </a>
+                    <ul class="sidebar-submenu">
+                        <li><a href="#">Portal de Trámites</a></li>
+                        <li><a href="#">Búsqueda de normativa</a></li>
+                        <li><a href="#">Información sobre impuestos</a></li>
+                        <li><a href="#">Concurso y selección de personal</a></li>
+                        <li><a href="#">Expedientes</a></li>
+                        <li><a href="#">Jubilaciones y Pensiones</a></li>
+                        <li><a href="#">Portal Ciudadano</a></li>
+                        <li><a href="#">Personal del Estado</a></li>
+                        <li><a href="#">Protección Civil y Gestión de Riesgos</a></li>
+                        <li><a href="#">Pensiones Ley 5110</a></li>
+                        <li><a href="#">Licitaciones</a></li>
+                        <li><a href="#">Tansparencia</a></li>
+                        <li><a href="#">Búsqueda de personal</a></li>
+                        <li><a href="#">Catastro</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Overlay para cerrar la barra lateral -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <header class="main-header">
+        <div class="container">
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <a href="#" class="logo">
+                <span class="santafe">Santa Fe</span> <span class="provincia">Provincia</span>
+            </a>
+
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar...">
+                <button type="submit"><i class="bi bi-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="sub-nav">
+        <div class="container">
+            <div class="sub-nav-header">
+                <i class="bi bi-lightning-charge-fill"></i>
+                <h2>Accesos Rápidos</h2>
+            </div>
+            <div class="sub-nav-row">
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-ticket-perforated"></i>
+                    <span>Boleto Educativo</span>
+                </a>
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-house-door"></i>
+                    <span>NIDO Créditos Hipotecarios</span>
+                </a>
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-arrow-right-circle"></i>
+                    <span>En Movimiento</span>
+                </a>
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-lightning-charge"></i>
+                    <span>Impulsa</span>
+                </a>
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <span>ObjetivoDengue</span>
+                </a>
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-book"></i>
+                    <span>Juicio Por Jurados</span>
+                </a>
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-cloud-rain-heavy"></i>
+                    <span>Emergencia Agropecuaria</span>
+                </a>
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-file-earmark-text"></i>
+                    <span>Licitaciones</span>
+                </a>
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-folder"></i>
+                    <span>Expedientes</span>
+                </a>
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-heart-pulse"></i>
+                    <span>IAPOS</span>
+                </a>
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-file-earmark-check"></i>
+                    <span>Partidas Online</span>
+                </a>
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-people-fill"></i>
+                    <span>Acuerdo Santa Fe</span>
+                </a>
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-shield-check"></i>
+                    <span>Vacunate</span>
+                </a>
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-key"></i>
+                    <span>API</span>
+                </a>
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-gear"></i>
+                    <span>Gobierno En Acción</span>
+                </a>
+                <a href="#" class="sub-nav-card">
+                    <i class="bi bi-file-earmark-text"></i>
+                    <span>Nueva Constitución</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="container">
+
+            <!-- Sección de Trámites Destacada -->
+            <section class="tramites-section">
+                <div class="tramites-header">
+                    <i class="bi bi-file-text-fill"></i>
+                    <h2>Trámites</h2>
+                </div>
+                <div class="tramites-grid">
+                    <a href="#" class="tramite-card">
+                        <i class="bi bi-calendar-check"></i>
+                        <span>Turnos online</span>
+                    </a>
+                    <a href="#" class="tramite-card">
+                        <i class="bi bi-file-earmark-text"></i>
+                        <span>Consultar expediente</span>
+                    </a>
+                    <a href="#" class="tramite-card">
+                        <i class="bi bi-credit-card"></i>
+                        <span>Pago de impuestos</span>
+                    </a>
+                    <a href="#" class="tramite-card">
+                        <i class="bi bi-person-badge"></i>
+                        <span>Registro Civil</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Sección de Noticias Importantes -->
+            <section class="important-news-section">
+                <div class="important-news-header">
+                    <i class="bi bi-megaphone-fill"></i>
+                    <h2>Noticias Importantes</h2>
+                </div>
+                <div class="important-news-grid">
+                    <article class="important-news-card">
+                        <div class="important-news-badge">URGENTE</div>
+                        <div class="important-news-content">
+                            <h3><i class="bi bi-exclamation-triangle-fill"></i> Emergencia Hídrica: Medidas de prevención</h3>
+                            <p>Se informa a toda la población sobre las medidas preventivas ante la emergencia hídrica declarada en la provincia.</p>
+                            <a href="#" class="important-news-link">Leer más <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    <article class="important-news-card">
+                        <div class="important-news-badge">IMPORTANTE</div>
+                        <div class="important-news-content">
+                            <h3><i class="bi bi-calendar-check"></i> Nueva Constitución: Consulta ciudadana abierta</h3>
+                            <p>Participá en la consulta ciudadana para la nueva Constitución de Santa Fe. Tu opinión es importante.</p>
+                            <a href="#" class="important-news-link">Participar <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    <article class="important-news-card">
+                        <div class="important-news-badge">ALERTA</div>
+                        <div class="important-news-content">
+                            <h3><i class="bi bi-shield-check"></i> Campaña de Vacunación: Nuevos puntos habilitados</h3>
+                            <p>Se habilitaron nuevos puntos de vacunación en toda la provincia. Consultá los horarios y ubicaciones.</p>
+                            <a href="#" class="important-news-link">Ver ubicaciones <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Widget del Clima -->
+            <section class="weather-section-top">
+                <div class="weather-widget weather-widget-top">
+                    <h4><i class="bi bi-cloud-sun"></i> Clima</h4>
+                    <div class="weather-content">
+                        <div class="weather-main">
+                            <div class="weather-icon">
+                                <i class="bi bi-sun-fill"></i>
+                            </div>
+                            <div class="weather-temp">
+                                <span class="temp-value">24°</span>
+                                <span class="temp-unit">C</span>
+                            </div>
+                        </div>
+                        <div class="weather-details">
+                            <p class="weather-location"><i class="bi bi-geo-alt-fill"></i> Santa Fe Capital</p>
+                            <p class="weather-description">Soleado</p>
+                            <div class="weather-stats">
+                                <div class="weather-stat">
+                                    <i class="bi bi-thermometer-half"></i>
+                                    <span>Máx: 28°</span>
+                                </div>
+                                <div class="weather-stat">
+                                    <i class="bi bi-thermometer"></i>
+                                    <span>Mín: 18°</span>
+                                </div>
+                                <div class="weather-stat">
+                                    <i class="bi bi-droplet"></i>
+                                    <span>Humedad: 65%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <h1 class="slogan">Todo por delante</h1>
+
+            <section class="featured-grid">
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop" alt="Construcción de viviendas">
+                    <div class="card-content">
+                        <h3>Obras para la construcción de nuevas viviendas</h3>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&h=300&fit=crop" alt="Reunión de gabinete">
+                    <div class="card-content">
+                        <h3>El gobernador Pullaro en la reunión de gabinete</h3>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=300&fit=crop" alt="Seguridad">
+                    <div class="card-content">
+                        <h3>Operativo de seguridad en Rosario</h3>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop" alt="Gobierno">
+                    <div class="card-content">
+                        <h3>"La prioridad es ordenar la provincia", afirmó el ministro.</h3>
+                    </div>
+                </article>
+            </section>
+
+            <section class="banner-grid">
+                <a href="#" class="banner-card">
+                    <div class="banner-icon-wrapper" style="background: linear-gradient(135deg, #e65100, #ff6b35);">
+                        <i class="bi bi-sun-fill"></i>
+                    </div>
+                    <span>Verano Santa Fe</span>
+                </a>
+                <a href="#" class="banner-card">
+                    <div class="banner-icon-wrapper" style="background: linear-gradient(135deg, #37474f, #546e7a);">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <span>Seguridad Vial</span>
+                </a>
+                <a href="#" class="banner-card">
+                    <div class="banner-icon-wrapper" style="background: linear-gradient(135deg, #0277bd, #0288d1);">
+                        <i class="bi bi-wallet2"></i>
+                    </div>
+                    <span>Billetera Santa Fe</span>
+                </a>
+                <a href="#" class="banner-card">
+                    <div class="banner-icon-wrapper" style="background: linear-gradient(135deg, #6a1b9a, #8e24aa);">
+                        <i class="bi bi-key-fill"></i>
+                    </div>
+                    <span>Llave Santa Fe</span>
+                </a>
+            </section>
+
+            <section class="large-image-section">
+                <div class="tag salud">Salud</div>
+                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&h=400&fit=crop" alt="Vacunación" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px;">
+            </section>
+
+            <section class="content-sidebar-grid">
+                <div class="main-content-grid">
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=120&fit=crop" alt="Informe Epidemiológico" style="width: 100%; height: 120px; object-fit: cover;">
+                        <div class="card-content">
+                            <h3>Informe Epidemiológico Semanal</h3>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=400&h=120&fit=crop" alt="Vacunación" style="width: 100%; height: 120px; object-fit: cover;">
+                        <div class="card-content">
+                            <h3>Vacunación y estrategias de salud</h3>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=120&fit=crop" alt="Obras" style="width: 100%; height: 120px; object-fit: cover;">
+                        <div class="card-content">
+                            <h3>Avance de obras en el norte</h3>
+                        </div>
+                    </article>
+                </div>
+                <aside>
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=120&fit=crop" alt="Infraestructura" style="width: 100%; height: 120px; object-fit: cover;">
+                        <div class="card-content">
+                            <h3>Mejoras en la red vial provincial</h3>
+                        </div>
+                    </article>
+                </aside>
+            </section>
+
+            <section class="large-image-section">
+                <div class="tag social">Desarrollo Social</div>
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=400&fit=crop" alt="Deportes" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px;">
+            </section>
+            
+            <section class="content-sidebar-grid">
+                <div class="main-content-grid">
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=150&fit=crop" alt="Seguridad" style="width: 100%; height: 150px; object-fit: cover;">
+                        <div class="card-content">
+                            <h3>Nuevo equipamiento para la policía</h3>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=150&fit=crop" alt="Acceso a información" style="width: 100%; height: 150px; object-fit: cover;">
+                        <div class="card-content">
+                            <h3>Acceso a la información pública</h3>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&h=150&fit=crop" alt="Gobierno" style="width: 100%; height: 150px; object-fit: cover;">
+                        <div class="card-content">
+                            <h3>Pullaro en el acto oficial</h3>
+                        </div>
+                    </article>
+                </div>
+                <aside>
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=150&fit=crop" alt="Educación" style="width: 100%; height: 150px; object-fit: cover;">
+                        <div class="card-content">
+                            <h3>Nuevas iniciativas educativas en la provincia</h3>
+                        </div>
+                    </article>
+                </aside>
+            </section>
+
+            <section class="large-image-section">
+                <div class="tag seguridad">Seguridad</div>
+                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=400&fit=crop" alt="Policía" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px;">
+            </section>
+            
+            <section class="content-sidebar-grid">
+                <div class="main-content-grid">
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=150&fit=crop" alt="Justicia" style="width: 100%; height: 150px; object-fit: cover;">
+                        <div class="card-content">
+                            <h3>Reunión por la implementación</h3>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=150&fit=crop" alt="Buscados" style="width: 100%; height: 150px; object-fit: cover; background-color: #c62828;">
+                        <div class="card-content">
+                            <h3>La lista de los más buscados</h3>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=150&fit=crop" alt="Juicio" style="width: 100%; height: 150px; object-fit: cover;">
+                        <div class="card-content">
+                            <h3>Juicio por Jurado</h3>
+                        </div>
+                    </article>
+                </div>
+                <aside class="sidebar-widget">
+                    <h4>Alertas</h4>
+                    <article class="card" style="margin-top: 15px;">
+                        <img src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=150&fit=crop" alt="Alerta meteorológica" style="width: 100%; height: 150px; object-fit: cover;">
+                        <div class="card-content">
+                            <h3>Alerta Meteorológica: Tormentas intensas</h3>
+                        </div>
+                    </article>
+                </aside>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4><i class="bi bi-building"></i> Gestión</h4>
+                    <ul>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Gobierno e Innovación Pública</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Economía</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Desarrollo Productivo</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Justicia y seguridad</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Obras Públicas</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Salud</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4><i class="bi bi-lightning-charge"></i> Accesos directos</h4>
+                    <ul>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> IPEC</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> API</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> EPE</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Lotería</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> IAPOS</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Caja de Jubilaciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4><i class="bi bi-info-circle"></i> Información</h4>
+                    <ul>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Contacto</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Mapa del sitio</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Transparencia</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Prensa</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Denuncias</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Portal del Empleado</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4><i class="bi bi-link-45deg"></i> Enlaces útiles</h4>
+                    <ul>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Trámites online</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Normativas</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Licitaciones</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Estadísticas</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Turismo</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Cultura</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-logos">
+                <div class="footer-logo-placeholder">Logo Santa Fe</div>
+                <div class="footer-logo-placeholder">Logo Justicia</div>
+                <div class="footer-logo-placeholder">Ascenso a Encontrarlos</div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>© 2025 Gobierno de Santa Fe</span>
+                <span>|</span>
+                <a href="#">Términos y Condiciones</a>
+                <span>|</span>
+                <a href="#">Política de Privacidad</a>
+                <span>|</span>
+                <a href="#">Accesibilidad</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Funcionalidad de la barra lateral
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const sidebarClose = document.getElementById('sidebarClose');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarMenuItems = document.querySelectorAll('.sidebar-menu-item');
+
+        // Abrir barra lateral
+        sidebarToggle.addEventListener('click', () => {
+            sidebarMenu.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Cerrar barra lateral
+        function closeSidebar() {
+            sidebarMenu.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        sidebarClose.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Expandir/colapsar submenús
+        sidebarMenuItems.forEach(item => {
+            const link = item.querySelector('.sidebar-menu-link');
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const isActive = item.classList.contains('active');
+                
+                // Cerrar todos los demás submenús
+                sidebarMenuItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle del submenú actual
+                item.classList.toggle('active', !isActive);
+            });
+        });
+
+        // Cerrar al presionar ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebarMenu.classList.contains('active')) {
+                closeSidebar();
+            }
+        });
+    </script>
+
+</body>
+</html>
